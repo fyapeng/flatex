@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线 LaTeX 编译器</title>
+    
+    <!-- CodeMirror 样式 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/theme/material-darker.min.css">
+
+    <!-- 自己的样式文件 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- 编辑器面板 -->
+        <div class="pane editor-pane">
+            <h3>LaTeX 编辑器</h3>
+            <textarea id="latex-editor"></textarea>
+        </div>
+
+        <!-- 控制和日志面板 -->
+        <div class="pane control-pane">
+            <button id="compile-button">编译 »</button>
+            <h3>编译日志</h3>
+            <pre id="log-output">点击“编译”按钮开始...</pre>
+        </div>
+
+        <!-- 预览面板 -->
+        <div class="pane preview-pane">
+            <h3>PDF 预览</h3>
+            <iframe id="pdf-preview"></iframe>
+        </div>
+    </div>
+
+    <!-- TexLive.js 核心库 -->
+    <script src="https://cdn.jsdelivr.net/npm/texlive.js@0.0.10/texlive.min.js"></script>
+
+    <!-- CodeMirror 核心库和 LaTeX 语法高亮 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/stex/stex.min.js"></script>
+
+    <!-- 自己的逻辑脚本 -->
+    <script src="script.js"></script>
+</body>
+</html>
