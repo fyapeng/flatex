@@ -34,14 +34,17 @@
         </div>
     </div>
 
+    <!-- 
+      重要改动：将所有外部库文件放在前面加载
+      这可以确保在我们的 script.js 执行之前, TeXLive 和 CodeMirror 对象已经存在于全局环境中
+    -->
     <!-- TexLive.js 核心库 -->
     <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/texlive.js@0.0.10/texlive.min.js"></script>
-
     <!-- CodeMirror 核心库和 LaTeX 语法高亮 -->
     <script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
     <script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/stex/stex.min.js"></script>
 
-    <!-- 自己的逻辑脚本 -->
+    <!-- 将我们自己的逻辑脚本放在所有库文件之后加载 -->
     <script data-cfasync="false" src="script.js"></script>
 </body>
 </html>
