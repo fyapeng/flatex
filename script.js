@@ -1,5 +1,5 @@
-// 当整个页面加载完成后执行
-window.onload = function() {
+// 当 HTML 文档结构加载完成后执行
+document.addEventListener('DOMContentLoaded', function() {
 
     // 1. 初始化 CodeMirror 编辑器
     const editor = CodeMirror.fromTextArea(document.getElementById('latex-editor'), {
@@ -62,9 +62,7 @@ $$ E = mc^2 $$
 
         try {
             // 使用 texlive.js 的 pdf() 方法进行编译
-            // 这个方法返回一个包含 PDF 数据、日志和错误的对象
             const result = await texlive.pdf(latexCode, {
-                // LaTeX 编译参数，nonstopmode 可以在出错时继续尝试编译
                 args: ["-interaction=nonstopmode", "-jobname=output"] 
             });
 
@@ -73,29 +71,25 @@ $$ E = mc^2 $$
 
             if (result.pdf) {
                 // 如果成功生成 PDF
-                logOutput.textContent += "\n\n编译成功！正在渲染 PDF...";
+                logOutput.textContent += "\\n\\n编译成功！正在渲染 PDF...";
                 
-                // 将返回的 Uint8Array 格式的 PDF 数据转换为 Blob
                 const pdfBlob = new Blob([result.pdf], { type: 'application/pdf' });
-                
-                // 创建一个指向该 Blob 的 URL
                 const pdfUrl = URL.createObjectURL(pdfBlob);
                 
-                // 将 iframe 的 src 指向这个 URL 来显示 PDF
                 pdfPreview.src = pdfUrl;
 
             } else {
                 // 如果没有生成 PDF，提示用户查看日志
-                logOutput.textContent += "\n\n编译失败，请检查日志中的错误信息。";
+                logOutput.textContent += "\\n\\n编译失败，请检查日志中的错误信息。";
             }
 
         } catch (error) {
             // 捕获编译过程中可能发生的意外错误
-            logOutput.textContent = `发生意外错误：\n${error.toString()}`;
+            logOutput.textContent = `发生意外错误：\\n${error.toString()}`;
         } finally {
             // 无论成功还是失败，都恢复按钮状态
             compileButton.disabled = false;
             compileButton.textContent = '编译 »';
         }
     });
-};
+});
